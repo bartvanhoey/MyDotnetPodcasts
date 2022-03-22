@@ -1,4 +1,9 @@
-﻿namespace MyDotnetPodcasts;
+﻿using MonkeyCache.FileStore;
+using MyDotnetPodcasts.Pages;
+using MyDotnetPodcasts.Services;
+using MyDotnetPodcasts.ViewModels;
+
+namespace MyDotnetPodcasts;
 
 public static class MauiProgram
 {
@@ -7,6 +12,10 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.ConfigureEssentials()
+			.ConfigureServices()
+			.ConfigurePages()
+			.ConfigureViewModels()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("Segoe-Ui-Bold.ttf", "SegoeUiBold");
@@ -15,6 +24,9 @@ public static class MauiProgram
 				fonts.AddFont("Segoe-Ui-Semilight.ttf", "SegoeUiSemilight");
 			});
 
-		return builder.Build();
+        Barrel.ApplicationId = "dotnetpodcasts";
+
+
+        return builder.Build();
 	}
 }

@@ -4,14 +4,15 @@ namespace MyDotnetPodcasts;
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    public App()
+    {
+        InitializeComponent();
 
-		TheTheme.SetTheme();
+        TheTheme.SetTheme();
 
         MainPage = Config.Desktop ? new DesktopShell() : new MobileShell();
 
-
+        Routing.RegisterRoute(nameof(DiscoverPage), typeof(DiscoverPage));
+        Routing.RegisterRoute(nameof(CategoriesPage), typeof(CategoriesPage));
     }
 }
