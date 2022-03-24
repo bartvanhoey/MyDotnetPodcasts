@@ -11,6 +11,7 @@ namespace MyDotnetPodcasts.ViewModels
         public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder) {
 
             builder.Services.AddSingleton<DiscoverViewModel>();
+            builder.Services.AddSingleton<CategoriesViewModel>();
 
             return builder;
         

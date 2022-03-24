@@ -13,7 +13,7 @@ namespace MyDotnetPodcasts.ViewModels
         //    private string _text;
         private IEnumerable<ShowViewModel> _showViewModels;
 
-        [ObservableProperty]
+        //[ObservableProperty]
         private CategoriesViewModel _categoriesViewModel;
 
         private readonly SubscriptionsService _subscriptionsService;
@@ -21,10 +21,11 @@ namespace MyDotnetPodcasts.ViewModels
 
         public ObservableRangeCollection<ShowGroup> ShowGroups { get; private set; } = new ObservableRangeCollection<ShowGroup>();
 
-        public DiscoverViewModel(ShowsService showsService, SubscriptionsService subscriptionsService)
+        public DiscoverViewModel(ShowsService showsService, SubscriptionsService subscriptionsService, CategoriesViewModel categoriesViewModel)
         {
             _showsService=showsService;
             _subscriptionsService=subscriptionsService;
+            _categoriesViewModel=categoriesViewModel;
         }
 
 
@@ -81,6 +82,13 @@ namespace MyDotnetPodcasts.ViewModels
                 viewModels.Add(showViewModel);
             }
             return viewModels;
+        }
+
+        [ICommand]
+        public async Task Subscribe(ShowViewModel vm)
+        {
+            await _subscriptionsService.UnSubscribeFromShowAsync(vm.Show);
+            vm.IsSubscribed = _subscriptionsService.IsSubscribed(vm.Show.Id);
         }
     }
 }

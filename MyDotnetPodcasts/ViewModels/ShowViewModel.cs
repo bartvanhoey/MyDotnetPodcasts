@@ -3,10 +3,12 @@ using MvvmHelpers.Commands;
 using MyDotnetPodcasts.Models;
 using MyDotnetPodcasts.Services;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MyDotnetPodcasts.ViewModels;
 
-public class ShowViewModel : BaseViewModel
+public partial class ShowViewModel : BaseViewModel
 {
     public Show Show { get; set; }
 
@@ -37,8 +39,8 @@ public class ShowViewModel : BaseViewModel
 
     public string Description { get => Show?.Description; }
 
-    public ICommand SubscribeCommand { get; internal set; }
-    public ICommand NavigateToDetailCommand => new AsyncCommand(NavigateToDetailCommandExecute);
+    //public ICommand SubscribeCommand { get; internal set; }
+    //public ICommand NavigateToDetailCommand => new AsyncCommand(NavigateToDetailCommandExecute);
 
     public ShowViewModel(Show show, SubscriptionsService subs)
     {
@@ -52,8 +54,11 @@ public class ShowViewModel : BaseViewModel
         return Task.CompletedTask;
     }
 
-    private Task NavigateToDetailCommandExecute()
+    [ICommand]
+    public async Task NavigateToDetail()
     {
         //return Shell.Current.GoToAsync($"{nameof(ShowDetailPage)}?Id={Show.Id}");
+
+        await Task.CompletedTask;
     }
 }
