@@ -35,6 +35,12 @@ namespace MyDotnetPodcasts.Services
             return showsResponse?.Select(r => GetShow(r));
         }
 
+        public async Task<Show> GetShowByIdAsync(Guid id)
+        {
+            var showResponse = await TryGetAsync<ShowResponse>($"shows/{id}");
+            return showResponse == null ? null : GetShow(showResponse);
+        }
+
         private Show GetShow(ShowResponse response) => new(response, _listenLaterService);
 
         private async Task<T> TryGetAsync<T>(string path)

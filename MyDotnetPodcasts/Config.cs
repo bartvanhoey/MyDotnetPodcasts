@@ -22,8 +22,8 @@ return true;
 
         public static string BaseWeb = $"{Base}:5002/";
         public static string Base = "";
-        public static string APIUrl = "https://82f8-2a02-810d-9f00-4d4-00-cda1.ngrok.io/v1/"; // 5000
-        public static string ListenTogetherUrl = "https://455e-2a02-810d-9f00-4d4-00-cda1.ngrok.io/listentogether"; //5001
+        public static string APIUrl = "https://e2c1-2a02-810d-9f00-4d4-bcbe-f1ea-ede7-f3da.ngrok.io/v1/"; // 5000
+        public static string ListenTogetherUrl = "https://6466-2a02-810d-9f00-4d4-bcbe-f1ea-ede7-f3da.ngrok.io/listentogether"; //5001
 
     }
 }

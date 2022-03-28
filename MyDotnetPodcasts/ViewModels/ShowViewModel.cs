@@ -1,64 +1,47 @@
-﻿using MvvmHelpers;
-using MvvmHelpers.Commands;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using MvvmHelpers;
 using MyDotnetPodcasts.Models;
 using MyDotnetPodcasts.Services;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
-namespace MyDotnetPodcasts.ViewModels;
-
-public partial class ShowViewModel : BaseViewModel
+namespace MyDotnetPodcasts.ViewModels
 {
-    public Show Show { get; set; }
-
-    private readonly SubscriptionsService subscriptionsService;
-
-    private bool isSuscribed;
-
-    public bool IsSubscribed
+    [ObservableObject]
+    public partial class ShowViewModel
     {
-        get
+        public Show Show { get; set; }
+        private readonly SubscriptionsService _subscriptionsService;
+
+        public ShowViewModel(Show show, SubscriptionsService subscriptionsService)
         {
-            return isSuscribed;
+            Show=show;
+            _subscriptionsService=subscriptionsService;
         }
 
-        set
+        [ObservableProperty]
+        private bool _isSubscribed;
+
+        public IEnumerable<Episode> Episodes { get => Show?.Episodes; }
+
+        public Uri Image { get => Show?.Image; }
+
+        public string Author { get => Show?.Author; }
+
+        public string Title { get => Show?.Title; }
+
+        public string Description { get => Show?.Description; }
+
+        public ICommand SubscribeCommand { get; internal set; }
+
+        internal Task InitializeAsync()
         {
-            SetProperty(ref isSuscribed, value);
+            _isSubscribed = _subscriptionsService.IsSubscribed(Show.Id);
+            return Task.CompletedTask;
         }
-    }
 
-    public IEnumerable<Episode> Episodes { get => Show?.Episodes; }
+        [ICommand]
+        private Task NavigateToDetail() => Shell.Current.GoToAsync($"{nameof(ShowDetailPage)}?Id={Show.Id}");
 
-    public Uri Image { get => Show?.Image; }
-
-    public string Author { get => Show?.Author; }
-
-    public new string Title { get => Show?.Title; }
-
-    public string Description { get => Show?.Description; }
-
-    //public ICommand SubscribeCommand { get; internal set; }
-    //public ICommand NavigateToDetailCommand => new AsyncCommand(NavigateToDetailCommandExecute);
-
-    public ShowViewModel(Show show, SubscriptionsService subs)
-    {
-        Show = show;
-        subscriptionsService = subs;
-    }
-
-    internal Task InitializeAsync()
-    {
-        IsSubscribed = subscriptionsService.IsSubscribed(Show.Id);
-        return Task.CompletedTask;
-    }
-
-    [ICommand]
-    public async Task NavigateToDetail()
-    {
-        //return Shell.Current.GoToAsync($"{nameof(ShowDetailPage)}?Id={Show.Id}");
-
-        await Task.CompletedTask;
     }
 }

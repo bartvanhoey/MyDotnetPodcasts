@@ -13,6 +13,7 @@ public partial class App : Application
         MainPage = Config.Desktop ? new DesktopShell() : new MobileShell();
 
         Routing.RegisterRoute(nameof(DiscoverPage), typeof(DiscoverPage));
+        Routing.RegisterRoute(nameof(ShowDetailPage), typeof(ShowDetailPage));
         Routing.RegisterRoute(nameof(CategoriesPage), typeof(CategoriesPage));
     }
 }

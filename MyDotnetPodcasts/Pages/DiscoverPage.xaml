@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:MyDotnetPodcasts.Controls"
              xmlns:viewmodels="clr-namespace:MyDotnetPodcasts.ViewModels"
-             xmlns:view="clr-namespace:MyDotnetPodcasts.Views"
+             xmlns:views="clr-namespace:MyDotnetPodcasts.Views"
+             
              x:Class="MyDotnetPodcasts.DiscoverPage"
              Title="DiscoverPage">
 
@@ -32,8 +33,9 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <view:ShowView SubscriptionCommand="{Binding SubscribeCommand, Source={RelativeSource AncestorType={x:Type viewmodels:DiscoverViewModel}}}"
-                                       SubscriptionCommandParameter="{Binding }" />
+                    <views:ShowItemView 
+                        SubscriptionCommand="{Binding SubscribeCommand, Source={RelativeSource AncestorType={x:Type viewmodels:DiscoverViewModel}}}" 
+                        SubscriptionCommandParameter="{Binding }" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.GroupHeaderTemplate>

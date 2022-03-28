@@ -11,7 +11,7 @@
                 client.BaseAddress = new Uri(Config.APIUrl);
             });
             builder.Services.AddSingleton<ListenLaterService>();
-
+            builder.Services.TryAddSingleton<PlayerService>();
 
             return builder;
 

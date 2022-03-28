@@ -9,7 +9,7 @@ namespace MyDotnetPodcasts.Models
 {
     public class ShowGroup : List<ShowViewModel>
     {
-        public ShowGroup(string name, List<ShowViewModel> showViewModels) : base(showViewModels) 
+        public ShowGroup(string name, List<ShowViewModel> showViewModels) : base(showViewModels)
         {
             Name=name;
         }
